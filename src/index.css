@@ -1,12 +1,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700&family=VT323&display=swap');
 
 body {
-  margin: 20px;
   font-family: 'Poppins';
   color: #333;
+  margin: 0px;
 }
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 a {
-  color: rgb(3, 196, 154);
+  color: rgb(255, 255, 255);
 }
 img {
   max-width: 100%;
@@ -26,6 +31,7 @@ nav h1 {
 .content {
   max-width: 960px;
   margin: 0 auto;
+  text-align: center;
 }
 .product {
   display: grid;
@@ -35,4 +41,8 @@ nav h1 {
 .offers, .products {
   display: flex;
   gap: 20px;
+}
+.bg-image{
+  background-image:url(../public/Rectangle.png);
+  background-size: 100% 100%;
 }
