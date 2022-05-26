@@ -1,0 +1,116 @@
+body {
+    background-color: #F7FAFC;
+    margin: 0
+}
+
+.register-header {
+    background: #2D3748;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 50px;
+    margin-bottom: 88px;
+
+    &__btn-login {
+        text-decoration: none;
+        border: 2px solid #F7FAFC;
+        border-radius: 5px;
+        height: 43px;
+        width: 103px;
+        color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+}
+
+.login-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 100px;
+
+    &__container {
+        background-color: white;
+        padding: 30px 40px;
+        margin-top: 40px;
+        border-radius: 8px;
+    min-width: 512px;
+    }
+
+    &__logo {
+        width: 128px;
+    }
+
+    &__block {
+        flex-direction: row;
+        align-items: center;
+        display: flex;
+        margin: 20px 0;
+    }
+
+    &__label {
+        color: #2A4365;
+        font-size: 20px;
+        margin-left: 15px;
+    }
+
+    &__input {
+        width: 100%;
+        border-radius: 4px;
+        height: 70px;
+        background-color: #EDF2F7;
+        border: none;
+        font-size: 20px;
+        padding: 0 15px;
+        box-sizing: border-box;
+    }
+
+    &__signin {
+        margin-top: 43px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+     &__register {
+        margin-top: 43px;
+        display: flex;
+        justify-content: flex-end;
+    }
+
+    &__forgot-password {
+        color: #3182CE;
+        font-size: 20px;
+    }
+
+    &__btn-submit {
+        background-color: #2A4365;
+        width: 200px;
+        height: 61px;
+        border: 0;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+
+    &__btn-submit__title {
+        color: white;
+        font-size: 20px;
+    }
+
+    &__btn-account {
+        border: 2px solid #2A4365;
+        border-radius: 5px;
+        width: 100%;
+        height: 61px;
+        background-color: white;
+        margin-top: 43px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+         font-size: 20px;
+        color: #2A4365;
+    }
+}

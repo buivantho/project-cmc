@@ -7,6 +7,8 @@ import Layout from "./Layout";
 import Products from "./pages/Products";
 import BlockView from "./pages/BlockView.tsx"
 import ProductDetails from "./pages/ProductDetails";
+import Login from './pages/Login/index.tsx';
+import Register from './pages/Register/index.tsx';
 import { styled } from "@mui/material/styles";
 import Paper from "@mui/material/Paper";
 import Grid from "@mui/material/Grid";
@@ -109,6 +111,12 @@ const App = () => {
               </Route>
               <Route path="/products">
                 <Products />
+              </Route>
+              <Route path="/login">
+                <Login />
+              </Route>
+              <Route path="/register">
+                <Register />
               </Route>
             </Switch>
           </BrowserRouter>
@@ -249,6 +257,12 @@ const App = () => {
                   </Route>
                   <Route path="/products">
                     <Products />
+                  </Route>
+                  <Route path="/login">
+                    <Login />
+                  </Route>
+                  <Route path="/register">
+                    <Register />
                   </Route>
                 </Switch>
               </Box>
