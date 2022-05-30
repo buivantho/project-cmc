@@ -1,9 +1,12 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { IconEmail, IconPassword, logo } from "../../assets/index.tsx";
 import "./styles.scss";
+import { login } from "../../redux/index.tsx";
 
 export default function Register() {
+  const dispatch = useDispatch();
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -13,6 +16,18 @@ export default function Register() {
     const nForm = { ...form };
     nForm[name] = e.target.value;
     setForm(nForm);
+  };
+
+  const _handleLogin = () => {
+    const user = {
+      token: Math.random().toString(36).slice(2, 30),
+      data: {
+        full_name: "",
+        email: form.email,
+      },
+    };
+
+    dispatch(login(user));
   };
 
   return (
