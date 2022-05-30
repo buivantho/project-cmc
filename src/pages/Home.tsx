@@ -33,6 +33,11 @@ export default function Home() {
       url:""
     },
   ] 
+  const renderViewDataFooter = (item, i) => {
+    return(
+      <li style={{color:"#FFFCFE", fontSize:"16px", padding:"20px"}}>{dataFooter.length - 1 == i ? <div style={{display:"flex"}}><img style={{width:"30px"}} src="/images/group.png"></img><span>Rival</span><span style={{color:"#4299E1"}}>CMS</span></div>:item.title  }</li>
+     );
+  }
   return (
     <div>
       <div className="content">
@@ -43,18 +48,13 @@ export default function Home() {
         
       </div>
       <div style={{position:"absolute", left:"25%", right:"25%", top:"550px"}}>
-        <img style={{width:"1123px"}} src="/group-4.png"></img>
+        <img style={{width:"1123px"}} src="/images/group-4.png"></img>
       </div>
       <div style={{position:"fixed", bottom:"0px", width:"100%", backgroundColor:"#2A4365"}}>
         <footer style={{textAlign:"center"}}>
           <ul style={{listStyleType:"none", display:"inline-flex"}}>
             {
-             dataFooter.map((item, i) => {
-               return(
-                <li style={{color:"#FFFCFE", fontSize:"16px", padding:"20px"}}>{dataFooter.length - 1 == i ? <div style={{display:"flex"}}><img style={{width:"30px"}} src="/group.png"></img><span>Rival</span><span style={{color:"#4299E1"}}>CMS</span></div>:item.title  }</li>
-               );
-             })
-
+             dataFooter.map((item, i) =>(renderViewDataFooter(item, i)))
              } 
           </ul>
         </footer>

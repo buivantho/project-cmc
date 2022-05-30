@@ -43,6 +43,6 @@ nav h1 {
   gap: 20px;
 }
 .bg-image{
-  background-image:url(../public/Rectangle.png);
+  background-image:url(../public/images/Rectangle.png);
   background-size: 100% 100%;
 }

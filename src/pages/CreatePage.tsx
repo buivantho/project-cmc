@@ -11,130 +11,78 @@ import Grid from "@mui/material/Grid";
 import Box from "@mui/material/Box";
 
 const columns = [
-  { id: "title", label: "Title", minWidth: 300 },
+  { id: "title", label: "Page title", minWidth: 300 },
+  { id: "created", label: "Created", minWidth: 200 },
   { id: "status", label: "Status", minWidth: 200 },
-  { id: "stats", label: "Stats", minWidth: 200 },
+  { id: "author", label: "Author", minWidth: 200 },
   { id: "add", label: "Add new", minWidth: 70 },
 ];
 
-function createData(title, status, stats, add) {
-  return { title, status, stats, add };
+function createData(title, created, status, author, add) {
+  return { title, created, status, author, add };
 }
 
 const rows = [
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    120,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
-    "Draft",
-    "00",
-    "/images/more-horizontal.png"
-  ),
-  createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    20,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
-    "Scheduled",
-    "00",
-    "/images/more-horizontal.png"
-  ),
-  createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    30,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    120,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    120,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    80,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
-    "Draft",
-    "00",
-    "/images/more-horizontal.png"
-  ),
-  createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    120,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
   createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
+    { main: "Home_page" },
+    "Updated 3 weeks ago",
     "Published",
-    120,
-    "/images/more-horizontal.png"
-  ),
-  createData(
-    {
-      main: "Design: A Survival Guide for Beginners",
-      sub: "Posted 3 days ago",
-    },
-    "Published",
-    120,
+    "Joe Bloggs",
     "/images/more-horizontal.png"
   ),
 ];
-
-export default function BlockView() {
-  const [page, setPage] = React.useState(0);
-  const [rowsPerPage, setRowsPerPage] = React.useState(10);
+export default function CreatePage() {
+  const [page, setPage] = useState(0);
+  const [rowsPerPage, setRowsPerPage] = useState(10);
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -144,7 +92,6 @@ export default function BlockView() {
     setRowsPerPage(+event.target.value);
     setPage(0);
   };
-
   const renderColumnCell = (columns, column, i) => {
     return (
       <TableCell key={column.id} style={{ minWidth: column.minWidth }}>
@@ -164,7 +111,7 @@ export default function BlockView() {
                 left: "30px",
                 top: "25px",
               }}
-              src="/images/pen-tool.png"
+              src="/images/file-plus.png"
             ></img>
             <span style={{ marginLeft: "30px" }}>{column.label}</span>
           </button>
@@ -173,6 +120,9 @@ export default function BlockView() {
         )}
       </TableCell>
     );
+  };
+  const generateListItem = (page, rowsPerPage) => {
+    return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   };
   const renderViewTable = (row) => {
     return (
@@ -192,68 +142,61 @@ export default function BlockView() {
                 }}
               >
                 {index == 1 ? (
+                  // style={{border:"1px solid" , color:value == "Published" ? "#9AE6B4" : value == "Draft" ? "#FC8181" : value == "Scheduled" ? "#FBD38D" : null , width:"fit-content", paddingLeft:"20px", paddingRight:"20px", paddingTop:"2px", paddingBottom:"2px", borderRadius:"50px", marginTop:"18px"}}
+                  <div
+                    style={{
+                      color: "#2A4365",
+                      fontSize: "14px",
+                      marginTop: "24px",
+                    }}
+                  >
+                    {value}
+                  </div>
+                ) : index == 0 ? (
+                  <div style={{ paddingTop: "20px" }}>
+                    <strong style={{ fontSize: "18px", color: "#2A4365" }}>
+                      {value.main}
+                    </strong>
+                  </div>
+                ) : index == 2 ? (
                   <div
                     style={{
                       border: "1px solid",
-                      color:
-                        value == "Published"
-                          ? "#9AE6B4"
-                          : value == "Draft"
-                          ? "#FC8181"
-                          : value == "Scheduled"
-                          ? "#FBD38D"
-                          : null,
+                      color: "#ffffff",
+                      backgroundColor: "#9AE6B4",
                       width: "fit-content",
                       paddingLeft: "20px",
                       paddingRight: "20px",
                       paddingTop: "2px",
                       paddingBottom: "2px",
                       borderRadius: "50px",
-                      marginTop: "18px",
+                      marginTop: "24px",
                     }}
                   >
                     {value}
                   </div>
-                ) : index == 0 ? (
-                  <div style={{ paddingTop: "10px" }}>
-                    <span style={{ fontSize: "18px", color: "#2A4365" }}>
-                      {value.main}
+                ) : index == 3 ? (
+                  <div style={{ marginTop: "24px" }}>
+                    <span style={{ color: "#2A4365" }}>{value} </span>{" "}
+                    <span
+                      style={{
+                        border: "1px solid",
+                        color: "#ffffff",
+                        backgroundColor: "#2C5282",
+                        width: "fit-content",
+                        paddingLeft: "20px",
+                        paddingRight: "20px",
+                        paddingTop: "2px",
+                        paddingBottom: "2px",
+                        borderRadius: "50px",
+                        marginTop: "18px",
+                      }}
+                    >
+                      Admin
                     </span>
-                    <br />
-                    <small style={{ fontSize: "14px", color: "#A0AEC0" }}>
-                      {value.sub}
-                    </small>
-                  </div>
-                ) : index == 2 ? (
-                  <div style={{ marginTop: "22px" }}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid
-                        container
-                        spacing={5}
-                        style={{ alignItems: "center" }}
-                      >
-                        <Grid item xs={1}>
-                          <strong
-                            style={{ color: "#2A4365", fontSize: "20px" }}
-                          >
-                            {value}{" "}
-                          </strong>
-                        </Grid>
-                        <Grid item xs={1}>
-                          <span style={{ fontSize: "14px", color: "#A0AEC0" }}>
-                            view
-                          </span>
-                        </Grid>
-                        {value > 0 ? (
-                          <Grid item xs={2}>
-                            <img src="/images/arrow-up-circle.png"></img>
-                          </Grid>
-                        ) : null}
-                      </Grid>
-                    </Box>
                   </div>
                 ) : (
-                  <div style={{ marginTop: "14px", textAlign: "center" }}>
+                  <div style={{ marginTop: "10px", textAlign: "center" }}>
                     <img style={{ width: "50px" }} src={value}></img>
                   </div>
                 )}
@@ -263,9 +206,6 @@ export default function BlockView() {
         })}
       </TableRow>
     );
-  };
-  const generateListItem = (page, rowsPerPage) => {
-    return rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage);
   };
   return (
     <Paper sx={{ width: "100%", overflow: "hidden", boxShadow: "none" }}>

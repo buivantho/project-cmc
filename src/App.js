@@ -5,8 +5,10 @@ import Home from "./pages/Home.tsx";
 import About from "./pages/About";
 import Layout from "./Layout";
 import Products from "./pages/Products";
+import SignIn from "./pages/Login/index.tsx"
 import BlockView from "./pages/BlockView.tsx"
 import ProductDetails from "./pages/ProductDetails";
+import CreatePage from "./pages/CreatePage.tsx"
 import Login from './pages/Login/index.tsx';
 import Register from './pages/Register/index.tsx';
 import { styled } from "@mui/material/styles";
@@ -28,145 +30,135 @@ import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 
 const drawerWidth = 240;
-
+const listDrawer = [
+  {
+    title: "Blog articles",
+    to: "/home",
+    icon:"/images/pen-tool-color.png"
+  },
+  {
+    title: "Create page",
+    to: "/create-page",
+    icon:"/images/file-plus-color.png"
+  },
+  {
+    title: "Files",
+    to: "/files",
+    icon:"/images/fileIcon.png"
+  },
+];
+const LinkNav = [
+  {
+    title: "Pricing",
+    to: "/",
+  },
+  {
+    title: "About",
+    to: "/about",
+  },
+  {
+    title: "Home",
+    to: "/home",
+  },
+  {
+    title: "Sign in",
+    to: "/login",
+  },
+];
 const App = () => {
   const [isCheck, setIsCheck] = useState(false);
-  const LinkNav = [
-    {
-      title: "Pricing",
-      to: "/",
-    },
-    {
-      title: "About",
-      to: "/about",
-    },
-    {
-      title: "Home",
-      to: "/home",
-    },
-    {
-      title: "Sign in",
-      to: "/products",
-    },
-  ];
+  const [isCheckLogin, setIsCheckLogin] = useState(false);
+  const [indexNav, setIndexNav] = useState(0)
+
   useEffect(() => {
-    if (window.location.pathname == "/home") {
+    if (window.location.pathname != "/") {
       setIsCheck(true);
     } else {
       setIsCheck(false);
     }
+    if (window.location.pathname == "/login" || window.location.pathname == "/register") {
+      setIsCheckLogin(true);
+    } else {
+      setIsCheckLogin(false);
+    }
+   
+  }, []);
+  useEffect(() => {
+    listDrawer.map((data, index) =>{
+      if(window.location.pathname == data.to){
+        setIndexNav(index)
+      }
+    })
+   
   }, []);
   const getDataNav = (data) => {
-    if (data == "/home") {
+    if (data != "/") {
       setIsCheck(true);
     } else {
       setIsCheck(false);
     }
+    if(data == "/login"){
+      
+      setIsCheckLogin(true)
+    }else{
+      setIsCheckLogin(false)
+    }
   };
+  const changeNav = (index) =>{
+    setIndexNav(index)
+  }
   return (
     <div style={{height: isCheck == false ? "150vh" : "auto" }}>
       {isCheck == false ? (
-        <div className="App bg-image">
+        <div className={isCheckLogin == true ? "App " : "App bg-image"} >
           <BrowserRouter>
+          {
+            isCheckLogin == false  ? 
             <nav
-              style={{
-                width: "97%",
-                maxWidth: "100%",
-                border: "none",
-                justifyContent: "end",
-                gap: "84px",
-                paddingTop: "36px",
-              }}
-            >
-              {LinkNav.map((data, index) => {
-                return (
-                  <Link
-                    style={
-                      data.to == "/products"
-                        ? {
-                            textDecorationLine: "none",
-                            border: "1px solid",
-                            padding: "5px 20px 5px 20px",
-                            borderRadius: "5px",
-                          }
-                        : { textDecorationLine: "none" }
-                    }
-                    to={data.to}
-                  >
-                    <div onClick={() => getDataNav(data.to)}>{data.title}</div>
-                  </Link>
-                );
-              })}
-            </nav>
+            style={{
+              width: "97%",
+              maxWidth: "100%",
+              border: "none",
+              justifyContent: "end",
+              gap: "84px",
+              paddingTop: "36px",
+            }}
+          >
+            {LinkNav.map((data, index) => {
+              return (
+                <Link
+                  style={
+                    data.to == "/login"
+                      ? {
+                          textDecorationLine: "none",
+                          border: "1px solid",
+                          padding: "5px 20px 5px 20px",
+                          borderRadius: "5px",
+                        }
+                      : { textDecorationLine: "none" }
+                  }
+                  to={data.to}
+                >
+                  <div onClick={() => getDataNav(data.to)}>{data.title}</div>
+                </Link>
+              );
+            })}
+          </nav> : null
+            
+          }
+            
             <Switch>
               <Route exact path="/" component={Home} />
-              <Route path="/about">
-                <About />
-              </Route>
-              <Route path="/home">
-                <Layout />
-              </Route>
-              <Route path="/products/:id">
-                <ProductDetails />
-              </Route>
-              <Route path="/products">
-                <Products />
-              </Route>
-              <Route path="/login">
-                <Login />
-              </Route>
-              <Route path="/register">
-                <Register />
-              </Route>
+              <Route exact path="/home" component={Layout} />
+              <Route exact path="/products/:id" component={ProductDetails} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
             </Switch>
           </BrowserRouter>
         </div>
       ) : (
         <div className="App">
           <BrowserRouter>
-            {/* <nav
-              style={{
-                width: "100%",
-                maxWidth: "100%",
-                backgroundColor: "#2D3748",
-                height: "80px",
-              }}
-            >
-              <div style={{ paddingRight: "80px", paddingLeft: "100px" }}>
-                <div style={{ display: "flex" }}>
-                  <img style={{ width: "30px" }} src="/group.png"></img>
-                  <span style={{ color: "#ffffff", fontSize: "20px" }}>
-                    Rival
-                  </span>
-                  <span style={{ color: "#4299E1", fontSize: "20px" }}>
-                    CMS
-                  </span>{" "}
-                  <div style={{ position: "absolute", right: "150px" }}>
-                    <Box sx={{ flexGrow: 1 }}>
-                      <Grid container spacing={1}>
-                        <Grid item xs={11}>
-                        <button
-                      style={{
-                        width: "82px",
-                        height: "32px",
-                        backgroundColor: "#D53F8C",
-                        color: "#FFFCFE",
-                        border: "none",
-                        borderRadius: "5px",
-                      }}
-                    >
-                      123
-                    </button>
-                        </Grid>
-                        <Grid item xs={1}>
-                          <img style={{width:"50px",position:"absolute", top:"-10px"}} src="/logo192.png"></img>
-                        </Grid>
-                      </Grid>
-                    </Box>
-                  </div>
-                </div>
-              </div>
-            </nav> */}
             <Box sx={{ display: "flex" }}>
               <CssBaseline />
               <AppBar
@@ -175,7 +167,7 @@ const App = () => {
                 style={{ backgroundColor: "#2D3748" }}
               >
                 <Toolbar>
-                  <img style={{ width: "30px" }} src="/group.png"></img>
+                  <img style={{ width: "30px" }} src="/images/group.png"></img>
                   <span style={{ color: "#ffffff", fontSize: "20px" }}>
                     Rival
                   </span>
@@ -183,7 +175,7 @@ const App = () => {
                     CMS
                   </span>{" "}
                 </Toolbar>
-                <div style={{ position: "absolute", right: "150px", top:"16px" }}>
+                <div style={{ position: "absolute", right: "140px", top:"16px" }}>
                     <Box sx={{ flexGrow: 1 }}>
                       <Grid container spacing={1}>
                         <Grid item xs={11}>
@@ -194,6 +186,7 @@ const App = () => {
                         backgroundColor: "#D53F8C",
                         color: "#FFFCFE",
                         border: "none",
+                        marginRight:"25px",
                         borderRadius: "5px",
                       }}
                     >
@@ -201,7 +194,7 @@ const App = () => {
                     </button>
                         </Grid>
                         <Grid item xs={1}>
-                          <img style={{width:"50px",position:"absolute", top:"-10px"}} src="/logo192.png"></img>
+                          <img style={{width:"50px",position:"absolute", top:"-10px", borderRadius:"50px"}} src="/images/image-avatar.png"></img>
                         </Grid>
                       </Grid>
                     </Box>
@@ -221,18 +214,21 @@ const App = () => {
                 <Toolbar />
                 <Box sx={{ overflow: "auto", padding:"25px",backgroundColor:"#E2E8F0", height:"100%"}}>
                   <List>
-                    {["View site", "Starred", "Send email", "Drafts"].map(
+                    {listDrawer.map(
                       (text, index) => (
                         
-                        <ListItem key={text} disablePadding>
+                        <ListItem key={text.to} disablePadding>
                           <ListItemButton>
                             <ListItemIcon>
-                              {index % 2 === 0 ? <InboxIcon /> : <MailIcon />}
+                              <img style={{width:"25px"}} src={text.icon}></img>
+                              {/* {index % 2 === 0 ? <InboxIcon /> : <MailIcon />} */}
                             </ListItemIcon>
                             <Link
                             style={{textDecorationLine: "none" }}
+                              to={text.to}
+                              onClick={()=>changeNav(index)}
                             >
-                              <div style={{color:"#2C5282"}}>{text}</div>
+                              <div style={{color:"#2C5282", fontWeight:indexNav == index ?  "900" : "400"}}>{text.title}</div>
                             </Link>
                           </ListItemButton>
                         </ListItem>
@@ -245,25 +241,8 @@ const App = () => {
               <Box component="main" sx={{ flexGrow: 1, p: 3 }}>
                 <Toolbar />
                  <Switch>
-                  <Route exact path="/" component={Home} />
-                  <Route path="/about">
-                    <About />
-                  </Route>
-                  <Route path="/home">
-                    <BlockView />
-                  </Route>
-                  <Route path="/products/:id">
-                    <ProductDetails />
-                  </Route>
-                  <Route path="/products">
-                    <Products />
-                  </Route>
-                  <Route path="/login">
-                    <Login />
-                  </Route>
-                  <Route path="/register">
-                    <Register />
-                  </Route>
+                  <Route exact path="/home" component={BlockView} />
+                  <Route exact path="/create-page" component={CreatePage} />
                 </Switch>
               </Box>
             </Box>
