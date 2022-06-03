@@ -12,6 +12,7 @@ import { Formik } from "formik";
 import * as Yup from "yup";
 import { login } from "../../redux/index.tsx";
 import { useDispatch, useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function Register() {
   const dispatch = useDispatch();
@@ -41,6 +42,9 @@ export default function Register() {
     console.log({ user });
 
     dispatch(login(user));
+    toast("Register successfully!", {
+      autoClose: 1500,
+    });
   };
 
   return (

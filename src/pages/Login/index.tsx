@@ -7,6 +7,7 @@ import { login } from "../../redux/index.tsx";
 import { Formik } from "formik";
 import * as Yup from "yup";
 import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -35,6 +36,9 @@ export default function Login() {
     console.log({ user });
 
     dispatch(login(user));
+    toast("Login successfully!", {
+      autoClose: 1500,
+    });
   };
 
   return (

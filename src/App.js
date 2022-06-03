@@ -29,7 +29,9 @@ import ListItemText from "@mui/material/ListItemText";
 import InboxIcon from "@mui/icons-material/MoveToInbox";
 import MailIcon from "@mui/icons-material/Mail";
 import { Provider } from 'react-redux';
-import {store} from './redux/index.tsx'
+import {store} from './redux/index.tsx';
+  import { ToastContainer } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 const drawerWidth = 240;
 const listDrawer = [
@@ -254,6 +256,7 @@ const App = () => {
           </div>
         )}
       </div>
+       <ToastContainer />
     </Provider>
   );
 };
