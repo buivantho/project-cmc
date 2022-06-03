@@ -43,7 +43,8 @@ body {
         padding: 30px 40px;
         margin-top: 40px;
         border-radius: 8px;
-    min-width: 512px;
+         min-width: 512px;
+         box-sizing: border-box;
     }
 
     &__logo {
@@ -126,11 +127,12 @@ body {
     .register-header {
         padding: 0 30px;
     }
-    
+
     .login-form__container {
         min-width: auto;
-        margin: 40px 20px;
-        padding: 15px 30px 30px;
+        margin: 40px 5%;
+        padding: 15px 25px 30px;
+        width: 90%;
     }
 
     .login-form__signin {
